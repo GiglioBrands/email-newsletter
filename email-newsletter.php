@@ -15,6 +15,7 @@ global $wpdb, $wp_version;
 define("WP_eemail_TABLE", $wpdb->prefix . "eemail_newsletter");
 define("WP_eemail_TABLE_SUB", $wpdb->prefix . "eemail_newsletter_sub");
 define("WP_eemail_TABLE_SCF", $wpdb->prefix . "gCF");
+define("WP_eemail_TABLE_APP", $wpdb->prefix . "eemail_newsletter_app");
 
 if ( ! defined( 'EMAIL_PLUGIN_BASENAME' ) )
 	define( 'EMAIL_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
@@ -128,6 +129,15 @@ function eemail_install()
 			");
 	}
 	
+	if(strtoupper($wpdb->get_var("show tables like '". WP_eemail_TABLE_APP . "'")) != strtoupper(WP_eemail_TABLE_APP))  
+	{
+		$wpdb->query("
+			CREATE TABLE `". WP_eemail_TABLE_APP . "` (
+				`eemail_app_pk` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+				`eemail_app_id` VARCHAR( 250 ) NOT NULL
+			");
+	}
+
 	$unsubscribelink = get_option('siteurl') . "/wp-content/plugins/email-newsletter/unsubscribe/unsubscribe.php?rand=##rand##&reff=##reff##&user=##user##";
 	add_option('eemail_un_option', "Yes");
 	add_option('eemail_un_text', "If you do not want to receive any more newsletters, Please <a href='##LINK##'>click here</a>");
@@ -160,6 +170,7 @@ function add_admin_menu_email_general()
 {
 	global $wpdb;
 	include_once('pages/welcome-page.php');
+
 }
 
 function eemail_deactivation() 
@@ -501,6 +512,12 @@ function eemai_widget_init()
 	} 
 }
 
+
+function add_app_register_page(){
+	global $wpdb;
+	include_once('pages/app-page.php');
+}
+
 function add_admin_menu_email_compose() 
 {
 	global $wpdb;
@@ -661,6 +678,7 @@ function GetFromEmail()
 function add_admin_menu_option() 
 {
 	add_menu_page( __( 'Email Newsletter', 'email-newsletter' ), __( 'Email Newsletter', 'email-newsletter' ), 'admin_dashboard', 'email-newsletter', 'eemail_admin_option' );
+	add_submenu_page('email-newsletter', 'Register App', __( 'Register App', 'email-newsletter' ), 'administrator', 'register-app', 'add_app_register_page');
 	add_submenu_page('email-newsletter', 'General Information', __( 'General Information', 'email-newsletter' ), 'administrator', 'general-information', 'add_admin_menu_email_general');
 	add_submenu_page('email-newsletter', 'Compose Mail', __( 'Compose Mail', 'email-newsletter' ), 'administrator', 'compose-email', 'add_admin_menu_email_compose');
 	add_submenu_page('email-newsletter', 'Send Mail to a Registered User', __( 'Mail to Registered User', 'email-newsletter' ), 'administrator', 'sendmail-registereduser', 'add_admin_menu_email_to_registered_user');
