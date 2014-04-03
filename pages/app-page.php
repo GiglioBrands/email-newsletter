@@ -156,6 +156,9 @@ $('#register-app-submit').click(function(e){
         {
           var pathname = window.location.href;
           window.location = pathname + "&app_id="+response.data.app_id;
+        }else{
+          $('#error').text(response.error)
+          $('#error').show();
         }
       }
   });
