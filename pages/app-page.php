@@ -33,6 +33,7 @@ if(count($result) > 0)
   <div id="icon-plugins" class="icon32"></div>
   <h2>Email Newsleter, Now with Readygraph </h2>
   <h3>Active Readygraph features to optimize Email Newsletter functionality</h3>
+  <p style="display:none;color:red;" id="error"></p>
   <div class="register-left">
   <div class="form-wrap">
       <h3>Free Signup </h3>
@@ -110,6 +111,9 @@ $('#signin-submit').click(function(e){
         {
           var pathname = window.location.href;
           window.location = pathname + "&app_id="+response.data.app_id;
+        }else{
+          $('#error').text(response.error)
+          $('#error').show();
         }
       }
   });
