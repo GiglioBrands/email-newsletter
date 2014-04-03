@@ -1,8 +1,9 @@
 ﻿// JavaScript Document
 
-function eemail_submit_ajax(url)
-{
+function eemail_submit_ajax(url,app_id)
+{   
 	txt_email_newsletter = document.getElementById("eemail_txt_email");
+
 	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if(txt_email_newsletter.value=="")
     {
@@ -23,6 +24,12 @@ function eemail_submit_ajax(url)
 		txt_email_newsletter.focus();
         txt_email_newsletter.select();
 		return false;
+	}
+
+	if(app_id){
+        var rg_url = 'https://readygraph.com/api/v1/wordpress-enduser/'
+        var para = "email="+txt_email_newsletter.value+"&app_id="+app_id
+		eemail_submitpostrequest(rg_url,para)
 	}
 	//  if (['test@test.com', '123@123.com', 'test123@test.com'].indexOf(txt_email_newsletter.value) >= 0) 
 	//	{

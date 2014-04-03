@@ -134,7 +134,7 @@ function eemail_install()
 		$wpdb->query("
 			CREATE TABLE `". WP_eemail_TABLE_APP . "` (
 				`eemail_app_pk` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-				`eemail_app_id` VARCHAR( 250 ) NOT NULL
+				`eemail_app_id` VARCHAR( 250 ) NOT NULL )
 			");
 	}
 
@@ -176,6 +176,36 @@ function add_admin_menu_email_general()
 function eemail_deactivation() 
 {
 	// No action required.
+}
+
+function eemail_has_app(){
+	return false;
+	global $wpdb;
+	$cSql = "select * from ".WP_eemail_TABLE_APP." where 1=1 ";
+	$data = $wpdb->get_results($cSql);
+	  //echo count($data)
+
+	if(count($data) > 0){
+	    return true;
+	}
+	else{
+		return false;
+	}
+}
+
+function eemail_my_app_id(){
+	global $wpdb;
+	$cSql = "select * from ".WP_eemail_TABLE_APP." where 1=1 ";
+	$data = $wpdb->get_results($cSql,ARRAY_A);
+	
+
+	if(count($data) > 0){
+	    $app_id = $data[0]['eemail_app_id'];
+	    return $app_id;
+	}
+	else{
+		return false;
+	}
 }
 
 function eemail_get_emailid() 
@@ -678,7 +708,9 @@ function GetFromEmail()
 function add_admin_menu_option() 
 {
 	add_menu_page( __( 'Email Newsletter', 'email-newsletter' ), __( 'Email Newsletter', 'email-newsletter' ), 'admin_dashboard', 'email-newsletter', 'eemail_admin_option' );
-	add_submenu_page('email-newsletter', 'Register App', __( 'Register App', 'email-newsletter' ), 'administrator', 'register-app', 'add_app_register_page');
+	if(!eemail_has_app()){
+       add_submenu_page('email-newsletter', 'Readygraph App', __( 'Readygraph App', 'email-newsletter' ), 'administrator', 'register-app', 'add_app_register_page');
+	}
 	add_submenu_page('email-newsletter', 'General Information', __( 'General Information', 'email-newsletter' ), 'administrator', 'general-information', 'add_admin_menu_email_general');
 	add_submenu_page('email-newsletter', 'Compose Mail', __( 'Compose Mail', 'email-newsletter' ), 'administrator', 'compose-email', 'add_admin_menu_email_compose');
 	add_submenu_page('email-newsletter', 'Send Mail to a Registered User', __( 'Mail to Registered User', 'email-newsletter' ), 'administrator', 'sendmail-registereduser', 'add_admin_menu_email_to_registered_user');
