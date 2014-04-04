@@ -17,13 +17,13 @@ if(count($result) > 0)
 <div class="wrap">
   <div id="icon-plugins" class="icon32"></div>
   <h2>Readygraph Setting</h2>
-  <h3>Readygraph is actived, to manage your account visit <a href="http://readygraph.com">readygraph.com</a></h3>
+  <h3>Readygraph is activated, to manage your account visit <a href="http://readygraph.com">readygraph.com</a></h3>
   <ul>
   <li>View Subscribers</li>
   <li>Send Emails</li>
   <li>View Insight Graph</li>
   </ul>
-  <a class="button add-new-h2" href="http://readygraph.com">Account Management</a>
+  <a class="button add-new-h2" href="http://readygraph.com/application/insights/ ">Account Management</a>
 </div>  
 
 
@@ -31,7 +31,7 @@ if(count($result) > 0)
 
 <div class="wrap">
   <div id="icon-plugins" class="icon32"></div>
-  <h2>Email Newsleter, Now with Readygraph </h2>
+  <h2>Email Newsletter, Now with Readygraph </h2>
   <h3>Active Readygraph features to optimize Email Newsletter functionality</h3>
   <p style="display:none;color:red;" id="error"></p>
   <div class="register-left">
@@ -59,7 +59,9 @@ if(count($result) > 0)
       <label for="tag-title">Confirm Password</label>
       <input type="password" id="register-password1" name="eemail_on_homepage">
       </p>
-      <p style="padding-top:10px;">
+      
+      <p style="max-width:180px;font-size: 10px;">By signing up, you agree to our <a href="http://www.readygraph.com/tos">Terms of Service</a> and <a href='http://readygraph.com/privacy/'>Privacy Policy</a>.</p>
+      <p style="margin-top:10px;">
       <input type="submit" style="width:193px;color:" value="Sign Up!" id="register-app-submit" class="button add-new-h2" name="Submit">
       </p>
   </div>
