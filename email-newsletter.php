@@ -62,6 +62,8 @@ function eemail_install()
 	add_option('eemail_on_search', "NO");
 	add_option('eemail_on_archives', "NO");
 	
+	add_option('my_plugin_do_activation_redirect', true);  
+
 	add_option('eemail_from_name', "noreply");
 	add_option('eemail_from_email', "noreply@mysitename.com");
 	
@@ -732,10 +734,19 @@ function eemail_textdomain()
 	  load_plugin_textdomain( 'email-newsletter' , false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 
+function on_plugin_activated_redirect(){
+	$setting_url="?page=register-app";	
+	if (get_option('my_plugin_do_activation_redirect', false)) {  
+        delete_option('my_plugin_do_activation_redirect'); 
+        wp_redirect(admin_url($setting_url)); 
+    }  
+}
+
 add_action('plugins_loaded', 'eemail_textdomain');
 add_action('admin_menu', 'add_admin_menu_option');
 register_activation_hook(__FILE__, 'eemail_install');
 register_deactivation_hook(__FILE__, 'eemail_deactivation');
+add_action('admin_init', 'on_plugin_activated_redirect');  
 add_action("plugins_loaded", "eemai_widget_init");
 add_action('init', 'eemai_widget_init');
 ?>
