@@ -181,11 +181,9 @@ function eemail_deactivation()
 }
 
 function eemail_has_app(){
-    return false;
     global $wpdb;
     $cSql = "select * from ".WP_eemail_TABLE_APP." where 1=1 ";
     $data = $wpdb->get_results($cSql);
-      //echo count($data)
 
     if(count($data) > 0){
         return true;

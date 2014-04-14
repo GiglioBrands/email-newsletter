@@ -1,89 +1,101 @@
 <?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
 <link rel="stylesheet" type="text/css" href="<?php echo EMAIL_PLUGIN_URL; ?>/inc/admin-css.css" />
 <?php 
-
 $app_id = $_GET["app_id"];
 if($app_id){
   $sSql = "insert into ".WP_eemail_TABLE_APP." VALUES ('1', '".$app_id."') ";  
   $data = $wpdb->get_results($sSql);
 }
-
-$cSql = "select * from ".WP_eemail_TABLE_APP." where 1=1 ";
-$result = $wpdb->get_results($cSql);
-
-if(count($result) > 0)
-{ 
 ?>
-<div class="wrap">
-  <div id="icon-plugins" class="icon32"></div>
-  <h2>Readygraph Setting</h2>
-  <h3>Readygraph is activated, to manage your account visit <a href="http://readygraph.com">readygraph.com</a></h3>
-  <ul>
-  <li>View Subscribers</li>
-  <li>Send Emails</li>
-  <li>View Insight Graph</li>
-  </ul>
-  <a class="button add-new-h2" href="http://readygraph.com/application/insights/ ">Account Management</a>
-</div>  
 
-
-<?php }else{ ?>
-
-<div class="wrap">
-  <div id="icon-plugins" class="icon32"></div>
-  <h2>Email Newsletter, Now with Readygraph </h2>
-  <h3>Active Readygraph features to optimize Email Newsletter functionality</h3>
-  <p style="display:none;color:red;" id="error"></p>
-  <div class="register-left">
-  <div class="form-wrap">
-      <h3>Free Signup </h3>
-      <p>
-      <label for="tag-title">Site URL</label>
-      <input type="text" id="register-url" name="eemail_on_homepage">
-      </p>
-
-      <p>
-      <label for="tag-title">Name</label>
-      <input type="text" id="register-name" name="eemail_on_homepage">
-      </p>
-
-      <p>
-      <label for="tag-title">Email</label>
-      <input type="text" id="register-email" name="eemail_on_homepage">
-      </p>
-      <p>
-      <label for="tag-title">Password</label>
-      <input type="password" id="register-password" name="eemail_on_homepage">
-      </p>
-      <p>
-      <label for="tag-title">Confirm Password</label>
-      <input type="password" id="register-password1" name="eemail_on_homepage">
-      </p>
+<?php 
+    $cSql = "select * from ".WP_eemail_TABLE_APP." where 1=1 ";
+    $result = $wpdb->get_results($cSql);
+    if(count($result) > 0)
+    { 
+    ?>
+    <div class="wrap">
+      <div id="icon-plugins" class="icon32"></div>
+      <h2>Final Step: Place the widget on your site to get started</h2>
+      <h3>Drag the widget to prominent place to maximize signups</h3>
+      <a class="button add-new-h2" style="background-color:#36812E;color:white;" href="widgets.php">Place Widget Now</a>
+      <p>Tips</p>
+      <ul>
+      <li>-Already have the widget in place? Manage your ReadyGrpah account <a href="http://readygraph.com/application/insights/"> here</a></li>
+      <li>-Need help? Email <a  href="mailto:nick@readygraph.com">nick@readygraph.com</a> or click <a href="http://readygraph.com">here</a> </li>
+      </ul>
       
-      <p style="max-width:180px;font-size: 10px;">By signing up, you agree to our <a href="http://www.readygraph.com/tos">Terms of Service</a> and <a href='http://readygraph.com/privacy/'>Privacy Policy</a>.</p>
-      <p style="margin-top:10px;">
-      <input type="submit" style="width:193px;color:" value="Sign Up!" id="register-app-submit" class="button add-new-h2" name="Submit">
-      </p>
-  </div>
       
-  </div>
-  <div class="register-right">
+    </div>  
+
+
+    <?php }else{ ?>
+
+    <div class="wrap">
+      <div id="icon-plugins" class="icon32"></div>
+      <h2>Email Newsletter, Now with Readygraph </h2>
+      <h3>Active Readygraph features to optimize Email Newsletter functionality</h3>
+      <p style="display:none;color:red;" id="error"></p>
+      <div class="register-left">
       <div class="form-wrap">
-      <p>
-      <h3>Already a member?</h3>
-      <label for="tag-title">Email</label>
-      <input type="text" id="signin-email" name="eemail_on_homepage">
-      </p>
-      <p>
-      <label for="tag-title">Password</label>
-      <input type="password" id="signin-password" name="eemail_on_homepage">
-      </p>
-      <p style="padding-top:10px;">
-      <input type="submit" style="width:193px;color:" value="Sign In" id="signin-submit" class="button add-new-h2" name="Submit">
-      </p>
-  </div>
-  </div>
-<?php } ?>
+          <h3>Free Signup </h3>
+          <p>
+          <label for="tag-title">Site URL</label>
+          <input type="text" id="register-url" name="eemail_on_homepage">
+          </p>
+
+          <p>
+          <label for="tag-title">Name</label>
+          <input type="text" id="register-name" name="eemail_on_homepage">
+          </p>
+
+          <p>
+          <label for="tag-title">Email</label>
+          <input type="text" id="register-email" name="eemail_on_homepage">
+          </p>
+          <p>
+          <label for="tag-title">Password</label>
+          <input type="password" id="register-password" name="eemail_on_homepage">
+          </p>
+          <p>
+          <label for="tag-title">Confirm Password</label>
+          <input type="password" id="register-password1" name="eemail_on_homepage">
+          </p>
+          
+          <p style="max-width:180px;font-size: 10px;">By signing up, you agree to our <a href="http://www.readygraph.com/tos">Terms of Service</a> and <a href='http://readygraph.com/privacy/'>Privacy Policy</a>.</p>
+          <p style="margin-top:10px;">
+          <input type="submit" style="width:193px;background-color:#36812E;color:white;" value="Continue to place widget" id="register-app-submit" class="button" name="Submit">
+          </p>
+      </div>
+          
+      </div>
+      <div class="register-mid">
+          <div class="form-wrap">
+          <p>
+          <h3>Already a member?</h3>
+          <label for="tag-title">Email</label>
+          <input type="text" id="signin-email" name="eemail_on_homepage">
+          </p>
+          <p>
+          <label for="tag-title">Password</label>
+          <input type="password" id="signin-password" name="eemail_on_homepage">
+          </p>
+          <p style="padding-top:10px;">
+          <input type="submit" style="width:193px;color:" value="Sign In" id="signin-submit" class="button add-new-h2" name="Submit">
+          </p>
+      </div>
+      </div>
+        <div class="register-right">
+          <div class="form-wrap alert">
+          <p>
+          <h3>Signup For These Benefits:</h3>
+          <p>-Grow your subscribers faster</p>
+          <p>-Engage users with automated email updates</p>
+          <p>-Enhanced email deliverablility</p>
+          <p>-Track performace with user-activity analytics</p>
+          </div>
+      </div>
+    <?php } ?>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
