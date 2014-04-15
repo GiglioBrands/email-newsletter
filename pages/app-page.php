@@ -17,11 +17,11 @@ if($app_id){
     <div class="wrap">
       <div id="icon-plugins" class="icon32"></div>
       <h2>Final Step: Place the widget on your site to get started</h2>
-      <h3>Drag the widget to prominent place to maximize signups</h3>
+      <h3>Drag the widget to a prominent place to maximize signups.</h3>
       <a class="button add-new-h2" style="background-color:#36812E;color:white;" href="widgets.php">Place Widget Now</a>
       <p>Tips</p>
       <ul>
-      <li>-Already have the widget in place? Manage your ReadyGrpah account <a href="http://readygraph.com/application/insights/"> here</a></li>
+      <li>-Already have the widget in place? Manage your ReadyGraph account <a href="http://readygraph.com/application/insights/"> here</a></li>
       <li>-Need help? Email <a  href="mailto:nick@readygraph.com">nick@readygraph.com</a> or click <a href="http://readygraph.com">here</a> </li>
       </ul>
       
@@ -34,7 +34,7 @@ if($app_id){
     <div class="wrap">
       <div id="icon-plugins" class="icon32"></div>
       <h2>Email Newsletter, Now with Readygraph </h2>
-      <h3>Active Readygraph features to optimize Email Newsletter functionality</h3>
+      <h3>Activate Readygraph features to optimize Email Newsletter functionality</h3>
       <p style="display:none;color:red;" id="error"></p>
       <div class="register-left">
       <div class="form-wrap">

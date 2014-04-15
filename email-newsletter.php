@@ -708,9 +708,7 @@ function GetFromEmail()
 function add_admin_menu_option() 
 {
     add_menu_page( __( 'Email Newsletter', 'email-newsletter' ), __( 'Email Newsletter', 'email-newsletter' ), 'admin_dashboard', 'email-newsletter', 'eemail_admin_option' );
-    if(!eemail_has_app()){
-       add_submenu_page('email-newsletter', 'Readygraph App', __( 'Readygraph App', 'email-newsletter' ), 'administrator', 'register-app', 'add_app_register_page');
-    }
+    add_submenu_page('email-newsletter', 'Readygraph App', __( 'Readygraph App', 'email-newsletter' ), 'administrator', 'register-app', 'add_app_register_page');
     add_submenu_page('email-newsletter', 'General Information', __( 'General Information', 'email-newsletter' ), 'administrator', 'general-information', 'add_admin_menu_email_general');
     add_submenu_page('email-newsletter', 'Compose Mail', __( 'Compose Mail', 'email-newsletter' ), 'administrator', 'compose-email', 'add_admin_menu_email_compose');
     add_submenu_page('email-newsletter', 'Send Mail to a Registered User', __( 'Mail to Registered User', 'email-newsletter' ), 'administrator', 'sendmail-registereduser', 'add_admin_menu_email_to_registered_user');
