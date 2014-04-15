@@ -18,7 +18,7 @@ if($app_id){
       <div id="icon-plugins" class="icon32"></div>
       <h2>Final Step: Place the widget on your site to get started</h2>
       <h3>Drag the widget to a prominent place to maximize signups.</h3>
-      <a class="button add-new-h2" style="background-color:#36812E;color:white;" href="widgets.php">Place Widget Now</a>
+      <a class="button add-new-h2" style="text-shadow:none;background:#36812E;background-color:#36812E;color:white;" href="widgets.php">Place Widget Now</a>
       <p>Tips</p>
       <ul>
       <li>-Already have the widget in place? Manage your ReadyGraph account <a href="http://readygraph.com/application/insights/"> here</a></li>
@@ -64,7 +64,7 @@ if($app_id){
           
           <p style="max-width:180px;font-size: 10px;">By signing up, you agree to our <a href="http://www.readygraph.com/tos">Terms of Service</a> and <a href='http://readygraph.com/privacy/'>Privacy Policy</a>.</p>
           <p style="margin-top:10px;">
-          <input type="submit" style="width:193px;background-color:#36812E;color:white;" value="Continue to place widget" id="register-app-submit" class="button" name="Submit">
+          <input type="submit" style="text-shadow:none;background:#36812E;width:193px;background-color:#36812E;color:white;" value="Continue to place widget" id="register-app-submit" class="button" name="Submit">
           </p>
       </div>
           
