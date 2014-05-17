@@ -2,10 +2,10 @@
 /*
 Plugin Name: Email newsletter
 Plugin URI: http://www.gopiplus.com/work/2010/09/25/email-newsletter/
-Description: Sometimes you want an easy way to e-mail all the people who registered, commented on the website, now it's as easy as installing this plug-in. also we have email subscriber option.
+Description: This easy-to-use plugin provides a simple way for Wordpress users to email registered users, commenters and subscribers. To place widget click <a href="widgets.php">here</a>.
 Author: Gopi.R
-Version: 16.0
-Author http://www.gopiplus.com/work/2010/09/25/email-newsletter/
+Version: 18.0
+Author URI: http://www.gopiplus.com
 Donate link: http://www.gopiplus.com/work/2010/09/25/email-newsletter/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

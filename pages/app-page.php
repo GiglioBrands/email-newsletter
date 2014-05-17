@@ -162,7 +162,8 @@ $('#register-app-submit').click(function(e){
         'site_url' : site_url,
         'first_name': first_name,
         'password' : password,
-        'password2' : password2
+        'password2' : password2,
+        'source':'email-newsletter'
       },
       dataType: 'json',
       success: function(response) {
