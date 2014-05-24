@@ -708,7 +708,7 @@ function GetFromEmail()
 function add_admin_menu_option() 
 {
     add_menu_page( __( 'Email Newsletter', 'email-newsletter' ), __( 'Email Newsletter', 'email-newsletter' ), 'admin_dashboard', 'email-newsletter', 'eemail_admin_option' );
-    add_submenu_page('email-newsletter', 'Readygraph App', __( 'Readygraph App', 'email-newsletter' ), 'administrator', 'register-app', 'add_app_register_page');
+    /*add_submenu_page('email-newsletter', 'Readygraph App', __( 'Readygraph App', 'email-newsletter' ), 'administrator', 'register-app', 'add_app_register_page');*/
     add_submenu_page('email-newsletter', 'General Information', __( 'General Information', 'email-newsletter' ), 'administrator', 'general-information', 'add_admin_menu_email_general');
     add_submenu_page('email-newsletter', 'Compose Mail', __( 'Compose Mail', 'email-newsletter' ), 'administrator', 'compose-email', 'add_admin_menu_email_compose');
     add_submenu_page('email-newsletter', 'Send Mail to a Registered User', __( 'Mail to Registered User', 'email-newsletter' ), 'administrator', 'sendmail-registereduser', 'add_admin_menu_email_to_registered_user');
@@ -745,4 +745,6 @@ register_deactivation_hook(__FILE__, 'eemail_deactivation');
 add_action('admin_init', 'on_plugin_activated_redirect');  
 add_action("plugins_loaded", "eemai_widget_init");
 add_action('init', 'eemai_widget_init');
+
+include "readygraph-extension.php"
 ?>
