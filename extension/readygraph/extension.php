@@ -159,7 +159,7 @@ script.onload = function(e) {
   settings['overrideFacebookSDK'] = true;
   settings['platform'] = 'others';
   settings['enableLoginWall'] = false;
-  settings['enableSidebar'] = <?php echo get_option('readygraph_enable_sidebar', '') ?>;
+  settings['enableSidebar'] = <?php echo get_option('readygraph_enable_sidebar', 'false') ?>;
 	top.readygraph.setup(settings);
 	readygraph.ready(function() {
 		readygraph.framework.require(['auth', 'invite', 'compact.sdk'], function() {
@@ -173,7 +173,7 @@ script.onload = function(e) {
 					});
 					readygraph.framework.$.cookie('rginvite', '1', {path: '/', expires: 3});
 				}
-			}, <?php echo get_option('readygraph_delay', '0') ?>);
+			}, <?php echo get_option('readygraph_delay', '10000') ?>);
 			
 			function process(userInfo) {
 				<?php echo $readygraph_email_subscribe ?>
