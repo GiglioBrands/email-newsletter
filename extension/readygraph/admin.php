@@ -200,9 +200,11 @@
 			window.close();
 		}
 		else {
+			$('.rgw-fb-login-button-iframe').hide();
 			$('div.authenticate').show();
 			
 			if ($('[name="readygraph_access_token"]').val()) {
+				$('.rgw-fb-login-button-iframe').show();
 				$('div.authenticate').hide();
 				$('div.authenticating').hide();
 				$('div.authenticated').show();
@@ -243,6 +245,7 @@
 		// Manage OAuth 2.0 Results
 		//
 		window.setCode = function(code) {
+			$('.rgw-fb-login-button-iframe').hide();
       $('div.authenticate').hide();
 			$('div.authenticating').show();
 			$('div.authenticated').hide();
@@ -257,18 +260,19 @@
         }
         , method: 'POST'
 				, success: function (response) {
-						$('div.authenticating').hide();
 						if (response) {
 							$('[name="readygraph_access_token"]').val(response.access_token);
 							$('[name="readygraph_refresh_token"]').val(response.refresh_token);
               window.setAccessToken(response.access_token);
 						} else {
-							$('div.authenticate').show(response.access_token);
+							$('div.authenticating').hide();
+							$('div.authenticate').show();
 						}
 					}
 			});
     }
 		window.setAccessToken = function(token) {
+			$('.rgw-fb-login-button-iframe').hide();
 			$('div.authenticate').hide();
 			$('div.authenticating').show();
 			$('div.authenticated').hide();
@@ -281,14 +285,15 @@
 					}
         , method: 'POST'
 				, success: function (response) {
-						$('div.authenticating').hide();
 						if (response.data) {
 							$('[name="readygraph_access_token"]').val(token);
 							$('[name="readygraph_email"]').val(response.data.email);
 							$('[name="readygraph_application_id"]').val(response.data.application_id);
 							$('#myForm')[0].submit();
 						} else {
+							$('div.authenticating').hide();
 							$('div.authenticate').show();
+							$('.rgw-fb-login-button-iframe').hide();
 						}
 					}
 			});
