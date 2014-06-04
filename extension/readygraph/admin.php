@@ -19,6 +19,7 @@
 	if (isset($_POST["readygraph_settings"])) update_option('readygraph_settings', $_POST["readygraph_settings"]);
 	if (isset($_POST["readygraph_delay"])) update_option('readygraph_delay', $_POST["delay"]);
 	if (isset($_POST["readygraph_enable_sidebar"])) update_option('readygraph_enable_sidebar', $_POST["sidebar"]);
+	if (isset($_POST["readygraph_auto_select_all"])) update_option('readygraph_auto_select_all', $_POST["selectAll"]);
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo plugins_url( 'assets/css/admin.css', __FILE__ ) ?>">
 <script type="text/javascript" src="<?php echo plugins_url( 'assets/js/admin.js', __FILE__ ) ?>"></script>
@@ -30,6 +31,7 @@
 <input type="hidden" name="readygraph_settings" value="<?php echo htmlentities(str_replace("\\\"", "\"", get_option('readygraph_settings', '{}'))) ?>">
 <input type="hidden" name="readygraph_delay" value="<?php echo get_option('readygraph_delay', '10000') ?>">
 <input type="hidden" name="readygraph_enable_sidebar" value="<?php echo get_option('readygraph_enable_sidebar', 'false') ?>">
+<input type="hidden" name="readygraph_auto_select_all" value="<?php echo get_option('readygraph_auto_select_all', 'true') ?>">
 <div class="authenticate" style="display: none;">
 	<div style="color: #ffffff; width: 350px; margin: 100px auto 0px; padding: 15px; border: solid 1px #2a388f; text-align: center; background-color: #1b75bb; -webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px;">
 		<h3 style="margin-top: 0px; font-weight: 300;"><?php echo $main_plugin_title ?>, Now with ReadyGraph</h3>
@@ -119,6 +121,11 @@
 									</select></p>
 									<p>Enable Sidebar: 
 									<select class="sidebar" name="sidebar" class="form-control">
+										<option value="true" selected>YES</option>
+										<option value="false">NO</option>
+									</select></p>
+									<p>Pre-checked Invite Contact: 
+									<select class="selectAll" name="selectAll" class="form-control">
 										<option value="true" selected>YES</option>
 										<option value="false">NO</option>
 									</select></p>
@@ -214,6 +221,7 @@
 				window.setup_readygraph($('[name="readygraph_application_id"]').val());
 				$('.delay').val($('[name="readygraph_delay"]').val());
 				$('.sidebar').val($('[name="readygraph_enable_sidebar"]').val());
+				$('.selectAll').val($('[name="readygraph_auto_select_all"]').val());
 				
 				//$('[name="readygraph_ad_format"][value="' + $('[name="_readygraph_ad_format"]').val() + '"]').parent().click();
 				//$('[name="readygraph_ad_timing"][value="' + $('[name="_readygraph_ad_timing"]').val() + '"]').parent().click();

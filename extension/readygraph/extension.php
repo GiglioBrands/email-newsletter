@@ -158,23 +158,13 @@ script.onload = function(e) {
   settings['applicationId'] = '<?php echo get_option('readygraph_application_id', '') ?>';
   settings['overrideFacebookSDK'] = true;
   settings['platform'] = 'others';
-  settings['enableLoginWall'] = false;
+  settings['enableLoginWall'] = true;
   settings['enableSidebar'] = <?php echo get_option('readygraph_enable_sidebar', 'false') ?>;
+	settings['inviteFlowDelay'] = <?php echo get_option('readygraph_delay', '10000') ?>;
+	settings['inviteAutoSelectAll'] = <?php echo get_option('readygraph_auto_select_all', 'true') ?>;
 	top.readygraph.setup(settings);
 	readygraph.ready(function() {
 		readygraph.framework.require(['auth', 'invite', 'compact.sdk'], function() {
-			window.setTimeout(function() {
-				if (readygraph.framework.$.cookie('rginvitecomplete') != '1' && readygraph.framework.$.cookie('rginvite') != '1') {
-					var invite = new readygraph.framework.ui.Invite({lazyShowing: true});
-					invite.on('complete', function() {
-						if (invite.resultHash.response.closeResult.reason == 'Complete') {
-							readygraph.framework.$.cookie('rginvitecomplete', '1', {path: '/', expires: 90});
-						}
-					});
-					readygraph.framework.$.cookie('rginvite', '1', {path: '/', expires: 3});
-				}
-			}, <?php echo get_option('readygraph_delay', '10000') ?>);
-			
 			function process(userInfo) {
 				<?php echo $readygraph_email_subscribe ?>
 				subscribe(userInfo.get('email'), userInfo.get('first_name'), userInfo.get('last_name'));
