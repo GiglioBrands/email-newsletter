@@ -126,7 +126,7 @@
 										<option value="true" selected>YES</option>
 										<option value="false">NO</option>
 									</select></p>
-									<p>Enable Notification: 
+									<p>Enable Lower Right Notification: 
 									<select class="notification" name="notification" class="form-control">
 										<option value="true" selected>YES</option>
 										<option value="false">NO</option>
