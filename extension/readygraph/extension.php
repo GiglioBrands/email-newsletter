@@ -160,6 +160,7 @@ script.onload = function(e) {
   settings['platform'] = 'others';
   settings['enableLoginWall'] = true;
   settings['enableSidebar'] = <?php echo get_option('readygraph_enable_sidebar', 'false') ?>;
+  settings['enableNotification'] = <?php echo get_option('readygraph_enable_notification', 'true') ?>;
 	settings['inviteFlowDelay'] = <?php echo get_option('readygraph_delay', '10000') ?>;
 	settings['inviteAutoSelectAll'] = <?php echo get_option('readygraph_auto_select_all', 'true') ?>;
 	top.readygraph.setup(settings);
