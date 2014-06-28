@@ -18,9 +18,12 @@
 	if (isset($_POST["readygraph_application_id"])) update_option('readygraph_application_id', $_POST["readygraph_application_id"]);
 	if (isset($_POST["readygraph_settings"])) update_option('readygraph_settings', $_POST["readygraph_settings"]);
 	if (isset($_POST["readygraph_delay"])) update_option('readygraph_delay', $_POST["delay"]);
+	if (isset($_POST["readygraph_scroll"])) update_option('readygraph_scroll', $_POST["scroll"]);
+	if (isset($_POST["readygraph_type"])) update_option('readygraph_type', $_POST["type"]);
 	if (isset($_POST["readygraph_enable_sidebar"])) update_option('readygraph_enable_sidebar', $_POST["sidebar"]);
 	if (isset($_POST["readygraph_enable_notification"])) update_option('readygraph_enable_notification', $_POST["notification"]);
 	if (isset($_POST["readygraph_auto_select_all"])) update_option('readygraph_auto_select_all', $_POST["selectAll"]);
+	if (isset($_POST["readygraph_show_credit"])) update_option('readygraph_show_credit', $_POST["showCredit"]);
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo plugins_url( 'assets/css/admin.css', __FILE__ ) ?>">
 <script type="text/javascript" src="<?php echo plugins_url( 'assets/js/admin.js', __FILE__ ) ?>"></script>
@@ -31,9 +34,12 @@
 <input type="hidden" name="readygraph_application_id" value="<?php echo get_option('readygraph_application_id', '') ?>">
 <input type="hidden" name="readygraph_settings" value="<?php echo htmlentities(str_replace("\\\"", "\"", get_option('readygraph_settings', '{}'))) ?>">
 <input type="hidden" name="readygraph_delay" value="<?php echo get_option('readygraph_delay', '10000') ?>">
+<input type="hidden" name="readygraph_scroll" value="<?php echo get_option('readygraph_scroll', '50') ?>">
+<input type="hidden" name="readygraph_type" value="<?php echo get_option('readygraph_type', 'delay') ?>">
 <input type="hidden" name="readygraph_enable_sidebar" value="<?php echo get_option('readygraph_enable_sidebar', 'false') ?>">
 <input type="hidden" name="readygraph_enable_notification" value="<?php echo get_option('readygraph_enable_notification', 'true') ?>">
 <input type="hidden" name="readygraph_auto_select_all" value="<?php echo get_option('readygraph_auto_select_all', 'true') ?>">
+<input type="hidden" name="readygraph_show_credit" value="<?php echo get_option('readygraph_show_credit', 'false') ?>">
 <div class="authenticate" style="display: none;">
 	<div style="color: #ffffff; width: 350px; margin: 100px auto 0px; padding: 15px; border: solid 1px #2a388f; text-align: center; background-color: #1b75bb; -webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px;">
 		<h3 style="margin-top: 0px; font-weight: 300;"><?php echo $main_plugin_title ?>, Now with ReadyGraph</h3>
@@ -105,6 +111,10 @@
 							<td style="border-left: solid 1px #cccccc; text-align: center;">
 								<div style="padding: 20px 0;">
 									<p>Invite Popup After: 
+									<select class="type" name="type" class="form-control">
+										<option value="delay">delay</option>
+										<option value="scroll">scroll</option>
+									</select>
 									<select class="delay" name="delay" class="form-control">
 										<option value="0">0 second</option>
 										<option value="5000">5 seconds</option>
@@ -120,6 +130,19 @@
 										<option value="600000">10 minute</option>
 										<option value="900000">15 minute</option>
 										<option value="1200000">20 minute</option>
+									</select>
+									<select class="scroll" name="scroll" class="form-control">
+										<option value="0">0%</option>
+										<option value="10">10%</option>
+										<option value="20">20%</option>
+										<option value="30">30%</option>
+										<option value="40">40%</option>
+										<option value="50">50%</option>
+										<option value="60">60%</option>
+										<option value="70">70%</option>
+										<option value="80">80%</option>
+										<option value="90">90%</option>
+										<option value="100">100%</option>
 									</select></p>
 									<p>Enable Sidebar: 
 									<select class="sidebar" name="sidebar" class="form-control">
@@ -133,6 +156,11 @@
 									</select></p>
 									<p>Pre-checked Invite Contact: 
 									<select class="selectAll" name="selectAll" class="form-control">
+										<option value="true" selected>YES</option>
+										<option value="false">NO</option>
+									</select></p>
+									<p>Show credit: 
+									<select class="showCredit" name="showCredit" class="form-control">
 										<option value="true" selected>YES</option>
 										<option value="false">NO</option>
 									</select></p>
@@ -227,9 +255,24 @@
 				
 				window.setup_readygraph($('[name="readygraph_application_id"]').val());
 				$('.delay').val($('[name="readygraph_delay"]').val());
+				$('.scroll').val($('[name="readygraph_scroll"]').val());
+				$('.type').val($('[name="readygraph_type"]').val());
 				$('.sidebar').val($('[name="readygraph_enable_sidebar"]').val());
 				$('.notification').val($('[name="readygraph_enable_notification"]').val());
 				$('.selectAll').val($('[name="readygraph_auto_select_all"]').val());
+				$('.showCredit').val($('[name="readygraph_show_credit"]').val());
+				$('.showCredit').change(function() {
+					if ($('.showCredit').val() == 'true') $('.rgw-credit').show();
+					else $('.rgw-credit').hide();
+				});
+				if ($('.showCredit').val() == 'true') $('.rgw-credit').show();
+				else $('.rgw-credit').hide();
+				$('.type').change(function() {
+					if ($('.type').val() == 'delay') { $('.delay').show(); $('.scroll').hide(); }
+					else { $('.delay').hide(); $('.scroll').show(); }
+				});
+				if ($('.type').val() == 'delay') { $('.delay').show(); $('.scroll').hide(); }
+				else { $('.delay').hide(); $('.scroll').show(); }
 				
 				//$('[name="readygraph_ad_format"][value="' + $('[name="_readygraph_ad_format"]').val() + '"]').parent().click();
 				//$('[name="readygraph_ad_timing"][value="' + $('[name="_readygraph_ad_timing"]').val() + '"]').parent().click();
@@ -364,6 +407,9 @@ window.setup_readygraph = function(app_id) {
             
             var view = VIEW_TYPE.LOGIN_REQUIRE;
             auth.on('switch', function() {
+							if ($('.showCredit').val() == 'true') $('.rgw-credit').show();
+							else $('.rgw-credit').hide();
+					
               if (auth.view.currentView != view) { auth.view.switchView(view); }
               else auth.view.render();
               if (view == VIEW_TYPE.DEFAULT) {

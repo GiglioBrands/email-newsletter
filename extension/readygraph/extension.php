@@ -154,18 +154,18 @@ var h = d.getElementsByTagName('head')[0], script = d.createElement('script');
 script.type = 'text/javascript';
 script.src = '//readygraph.com/scripts/readygraph.js';
 script.onload = function(e) {
-  var settings = <?php echo str_replace("\\\"", "\"", get_option('readygraph_settings', '{}')) ?>;
-  settings['applicationId'] = '<?php echo get_option('readygraph_application_id', '') ?>';
-  settings['overrideFacebookSDK'] = true;
-  settings['platform'] = 'others';
-  settings['enableLoginWall'] = true;
-  settings['enableSidebar'] = <?php echo get_option('readygraph_enable_sidebar', 'false') ?>;
-  settings['enableNotification'] = <?php echo get_option('readygraph_enable_notification', 'true') ?>;
-	settings['inviteFlowDelay'] = <?php echo get_option('readygraph_delay', '10000') ?>;
-	settings['inviteAutoSelectAll'] = <?php echo get_option('readygraph_auto_select_all', 'true') ?>;
-	top.readygraph.setup(settings);
-	readygraph.ready(function() {
-		readygraph.framework.require(['auth', 'invite', 'compact.sdk'], function() {
+	var render = function(delay) {
+		var settings = <?php echo str_replace("\\\"", "\"", get_option('readygraph_settings', '{}')) ?>;
+		settings['applicationId'] = '<?php echo get_option('readygraph_application_id', '') ?>';
+		settings['overrideFacebookSDK'] = true;
+		settings['platform'] = 'others';
+		settings['enableLoginWall'] = true;
+		settings['enableSidebar'] = <?php echo get_option('readygraph_enable_sidebar', 'false') ?>;
+		settings['enableNotification'] = <?php echo get_option('readygraph_enable_notification', 'true') ?>;
+		settings['inviteFlowDelay'] = delay;
+		settings['inviteAutoSelectAll'] = <?php echo get_option('readygraph_auto_select_all', 'true') ?>;
+		top.readygraph.setup(settings);
+		readygraph.ready(function() {
 			function process(userInfo) {
 				<?php echo $readygraph_email_subscribe ?>
 				subscribe(userInfo.get('email'), userInfo.get('first_name'), userInfo.get('last_name'));
@@ -183,10 +183,43 @@ script.onload = function(e) {
 				}
 			}, true);
 		});
-	});
+	}
+	
+	var $ = readygraph.framework.$;
+	<?php if (get_option('readygraph_type', 'delay') == 'delay') { ?>
+		render(<?php echo get_option('readygraph_delay', '10000') ?>);
+	<?php } else { ?>
+		var SCROLL_FRACTION = <?php echo get_option('readygraph_scroll', '50') ?> / 100.0;
+		$(document).ready(function() {
+			function processOnScroll() {
+				var heightFraction = SCROLL_FRACTION;
+				var shouldShow = false;
+
+				var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight; 
+				var documentHeight = document.body.scrollHeight;
+				
+				if (windowHeight*1.3 >= documentHeight) shouldShow = true;
+				else if ($(window).scrollTop() >= (documentHeight - windowHeight)*(1.0-heightFraction)) shouldShow = true;
+				
+				if (shouldShow) {
+					render(0);
+					$(window).unbind('scroll', processOnScroll);
+					$(window).unbind('resize', processOnScroll);
+				}
+			}
+			$(window).bind('scroll', processOnScroll);
+			$(window).bind('resize', processOnScroll);
+			processOnScroll();
+		});
+	<?php } ?>
 }
 h.appendChild(script);
 </script>
+<?php if (get_option('readygraph_show_credit', 'false') == 'false') { ?>
+<style type="text/css">
+.rgw-credit { display: none !important; }
+</style>
+<?php } ?>
 	<?php
 	}
 }
