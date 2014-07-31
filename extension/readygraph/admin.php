@@ -296,8 +296,41 @@
 									$('.result').text('Insight');
 								}
 							}
+						, error: function (response) {
+							refresh_access_token();
+						}
 					});
 				}
+			}
+		}
+		function refresh_access_token() {
+			var refresh_token = $('[name="readygraph_refresh_token"]').val();
+			if (refresh_token) {
+				$('div.authenticate').hide();
+				$('div.authenticating').show();
+				$('div.authenticated').hide();
+				
+				$.ajax({
+						url: resourceHost + '/oauth/access_token'
+					, data: {
+						grant_type: 'refresh_token',
+            refresh_token: $('[name="readygraph_refresh_token"]').val(),
+            redirect_uri: encodeURIComponent(location.href.replace('#' + location.hash,"")),
+            client_id: settings.clientId
+					}
+					, method: 'POST'
+					, success: function (response) {
+							$('[name="readygraph_access_token"]').val(response.access_token);
+							$('[name="readygraph_refresh_token"]').val(response.refresh_token);
+              window.setAccessToken(response.access_token);
+						}
+					, error: function (response) {
+							alert('We couldn\'t authenticate your account. Please check your internet connection.');
+							$('div.authenticate').show();
+							$('div.authenticating').hide();
+							$('div.authenticated').hide();
+						}
+				});
 			}
 		}
 		
